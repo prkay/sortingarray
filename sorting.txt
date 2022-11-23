@@ -1,0 +1,40 @@
+void main() {
+  List<int> arrayList = [1,0,2, 0,2, 2, 2,1,1,0];
+  //List<int> arrayList = [0,0,1,1,1,2,2,2,2];
+  print(sortArrayList(arrayList));
+}
+
+List<int> sortArrayList(List<int> input){
+  if(input.length > 1){
+    int middleIndexOfList = input.length ~/2;
+    List<int> leftArray = input.sublist(0,middleIndexOfList);
+    List<int> rightArray = input.sublist(middleIndexOfList);
+    return merge(sortArrayList(leftArray), sortArrayList(rightArray));
+  }
+  return input;
+}
+
+  List<int> merge(List<int> leftList, List<int> rightList) {
+    List<int> mergedList = [];
+    int i = 0;
+    int j = 0;
+    while (i < leftList.length && j < rightList.length) {
+      if (leftList[i] <= rightList[j]) {
+        mergedList.add(leftList[i]);
+        i++;
+      } else {
+        mergedList.add(rightList[j]);
+        j++;
+      }
+    }
+
+    while (i < leftList.length) {
+      mergedList.add(leftList[i]);
+      i++;
+    }
+    while (j < rightList.length) {
+      mergedList.add(rightList[j]);
+      j++;
+    }
+    return mergedList;
+  }
